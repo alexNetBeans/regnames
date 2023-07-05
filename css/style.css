@@ -1,0 +1,44 @@
+
+.pagi a{
+	/*justify-content: space-between;*/
+	text-decoration: none;
+}
+
+.alert-danger{
+	margin-top: 25px;
+}
+
+.aa{
+	margin-top: 45px;
+}
+.alert-primarys{
+	margin-top: 15px;
+}
+
+.regNome{
+	color: #ccc;
+	font-size: 18px;
+}
+
+.logoimg{
+	width: 150px;
+	text-align: center;
+}
+
+
+.form-group {
+	text-align: left;
+}
+
+
+.form-check{ 
+	text-align: left;
+}
+
+
+.logo{
+	margin-top:    15px;
+	margin-bottom: 0px;
+	font-size:    120px;
+	color:      #5352ed;
+}

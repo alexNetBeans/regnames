@@ -152,7 +152,7 @@ async function getLastNames() {
     .then(res => res.text())
     .then(text => JSON.parse(text.substr(47).slice(0, -2)));
 
-    numberNames = data.table.rows.length;
+    numberNames = data.table.rows.length - 1;
     iM = numberNames - 10;
 
     $('#numberNames').text(numberNames);  

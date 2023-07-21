@@ -51,56 +51,28 @@ let btnSchedule = $('#btnSchedule').on('click', function(){
 
 function setScheduler(pl1, pl2, homePl1, homePl2, dateBr, hour)
 {
+		let insertSchedule = firebase.database().ref().child('challenge').push({
+			
+			"player1": pl1,
+			"player2": pl2,
+			"winPl1":   0,   
+			"winPl2":   0,
+			"homePl1": homePl1,
+			"homePl2": homePl2,
+			"date": dateBr,
+			"hour": hour,
+			"finish": 0   
 
-let apiKey = 'b8oGEGQsdyeQ2SwEN1UlFxEqHlNFD7QEOeb56sqaanPk1s0mbl1oG5zlB2iVwCrG';
-
-var data = JSON.stringify(
-    {
-        "collection": "challenge",
-        "database":   "12casas",
-        "dataSource": "Cluster0",
-        "document": 
-    {
-		"player1": pl1,
-		"player2": pl2,
-		"winPl1":   0,   
-		"winPl2":   0,
-		"homePl1": homePl1,
-		"homePl2": homePl2,
-		"date": dateBr,
-		"hour": hour,
-		"finish": 0
-    }
-});
-            
-var config = {
-    method: 'post',
-    url: 'https://sa-east-1.aws.data.mongodb-api.com/app/data-bfyfs/endpoint/data/v1/action/insertOne',
-    headers: 
-    {
-      'Content-Type': 'application/json',
-      'api-key': apiKey,
-    },
-    data: data
-};
-
-axios(config)
-    .then(function (response) {
+	},
+	(error) => {
+		if (error) {
+			showMsg('erro');
+		} else {
+		// Data saved successfully!
 		showMsg('success');
-		console.log(JSON.stringify(response.data));
-
-    })
-    .catch(function (error) {
-		showMsg('erro');
-		console.log(error);
-
-	}).finally(function(response) {
-		
-	});
-	
-	
+		}
+	}).key   
 };
-
 
 // Chama função assim que load da página terminar
 
@@ -191,95 +163,46 @@ function getHomeFromid(idHome){
 	}
 }
 
-// recupera id casa do Player
-
-function getHomeId(PlayerName){
-
-	let apiKey = 'b8oGEGQsdyeQ2SwEN1UlFxEqHlNFD7QEOeb56sqaanPk1s0mbl1oG5zlB2iVwCrG';
-
-	var data = JSON.stringify(
-		{
-		"collection": "players",
-		"database": "12casas",
-		"dataSource": "Cluster0",
-		"filter": {"_id": "objectId('64aff6a0270b624c7bcd6341')"}
-	});
-				
-	var config = {
-		method: 'post',
-		url: 'https://sa-east-1.aws.data.mongodb-api.com/app/data-bfyfs/endpoint/data/v1/action/findOne',
-		headers: {
-		  'Content-Type': 'application/json',
-		  'api-key': apiKey,
-		},
-		data: data
-	};
-
-	axios(config)
-		.then(function (response) 
-		{
-			console.log(response.data);
-			
-			// let homePl1 = $('#homePl1');
-			// homePl1.text(getHomeFromid(response.data.documents));
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
-	}
-
 
 // recupera player para adicionar ao form select
 
 function getPlayers(){
 
-	let apiKey = 'b8oGEGQsdyeQ2SwEN1UlFxEqHlNFD7QEOeb56sqaanPk1s0mbl1oG5zlB2iVwCrG';
+	const dbRef = firebase.database().ref();
+    dbRef.child("players").get().then((snapshot) => 
+    {
 
-	var data = JSON.stringify(
+		if (snapshot.exists()) 
 		{
-		"collection": "players",
-		"database": "12casas",
-		"dataSource": "Cluster0",
-		"filter": {},
-		"limit": 40
-	});
-				
-	var config = {
-		method: 'post',
-		url: 'https://sa-east-1.aws.data.mongodb-api.com/app/data-bfyfs/endpoint/data/v1/action/find',
-		headers: {
-		  'Content-Type': 'application/json',
-		  'api-key': apiKey,
-		},
-		data: data
-	};
+			console.log(snapshot.val());
 
-	axios(config)
-		.then(function (response) 
-		{
-			console.log(response.data);
-			
 			let addOption  = $('#player1');
 			let addOption2 = $('#player2');
 
-			response.data.documents.forEach(function(p, i){
-				
-			   let tag = `<option value=${p.idHome} id=a>${p.player}</option>`;
-				
-				addOption.append(tag);
-				addOption2.append(tag);
-				
-			});
-				
-				let idHomePl1 = $('#player1').val();
-				let homePl1   = $('#homePl1');
-				homePl1.text(getHomeFromid(idHomePl1));
+			snapshot.forEach(function(p, i){
+						
+			let tag = `<option value=${p.val().idHome} id=a>${p.val().player}</option>`;
+						
+			addOption.append(tag);
+			addOption2.append(tag);
 
-				let idHomePl2 = $('#player2').val();
-				let homePl2   = $('#homePl2');
-				homePl2.text(getHomeFromid(idHomePl2));
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
-	}	
+					
+			let idHomePl1 = $('#player1').val();
+			let homePl1   = $('#homePl1');
+			homePl1.text(getHomeFromid(idHomePl1));
+
+			let idHomePl2 = $('#player2').val();
+			let homePl2   = $('#homePl2');
+			homePl2.text(getHomeFromid(idHomePl2));
+					
+			});
+			} 
+			else 
+			{
+				console.log("No data available");
+			}
+			}).catch((error) => 
+			{
+				console.error(error);
+			});
+	}

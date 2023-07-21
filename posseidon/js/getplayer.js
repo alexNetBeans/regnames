@@ -92,43 +92,17 @@ function getHomeFromid(idHome){
 
 function getPlayers(){
 
-	let result = [];
-	let apiKey = 'b8oGEGQsdyeQ2SwEN1UlFxEqHlNFD7QEOeb56sqaanPk1s0mbl1oG5zlB2iVwCrG';
-
-	var data = JSON.stringify(
-		{
-		"collection": "players",
-		"database": "12casas",
-		"dataSource": "Cluster0",
-		"filter": {},
-		"limit": 40
-	});
-				
-	var config = {
-		method: 'post',
-		url: 'https://sa-east-1.aws.data.mongodb-api.com/app/data-bfyfs/endpoint/data/v1/action/find',
-		headers: {
-		  'Content-Type': 'application/json',
-		  'api-key': apiKey,
-		},
-		data: data
-	};
-
-	axios(config)
-		.then(function (response) 
-		{
-			console.log(JSON.stringify(response.data));
-			
+	const dbRef = firebase.database().ref();
+	dbRef.child("players").get().then((snapshot) => 
+	{
 			let plTable = $('#plData');
-
-			response.data.documents.forEach(function(p, i){
-				
-			   let tag = '<tr><th scope="row"></th><td>' + p.player +  '</td><td>' + p.wins + '</td><td>' + getHomeFromid(p.idHome) + '</td></tr>';
+			snapshot.forEach(function(p, i){
+					
+				let tag = '<tr><th scope="row"></th><td>' + p.val().player +  '</td><td>' + p.val().wins + '</td><td>' + getHomeFromid(p.val().idHome) + '</td></tr>';
 				plTable.append(tag);
-			});
-			
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
+			})
+			 .catch((error) => {
+			  console.error(error);
+			});	
+	})
 }

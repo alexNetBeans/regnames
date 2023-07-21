@@ -92,72 +92,46 @@ function getHomeFromid(idHome){
 
 // recupera os desafios agendados. Realizados ou não.
 
-function getchallenge(idChallenger){
+function getchallenge(){
 
-	let result = [];
-	let apiKey = 'b8oGEGQsdyeQ2SwEN1UlFxEqHlNFD7QEOeb56sqaanPk1s0mbl1oG5zlB2iVwCrG';
-
-	var data = JSON.stringify(
-		{
-			"collection": "challenge",
-			"database": "12casas",
-			"dataSource": "Cluster0",
-			"filter": {},
-	});
-				
-	var config = {
-		method: 'post',
-		url: 'https://sa-east-1.aws.data.mongodb-api.com/app/data-bfyfs/endpoint/data/v1/action/find',
-		headers: {
-		  'Content-Type': 'application/json',
-		  'api-key': apiKey,
-		},
-		data: data
-	};
-
-	axios(config)
-		.then(function (response) 
-		{
-			// console.log(JSON.stringify(response.data));
+const dbRef = firebase.database().ref();
+	dbRef.child("challenge").get().then((snapshot) => 
+	{
+		snapshot.forEach(function(p, i){
 			
-			result = response.data.documents;
+				if (p.val().finish == 0){
+					
+					challenge = 1;
 
-			result.forEach(function(p, i){
-				
-			if (p.finish == 0){
-				
-				challenge = 1;
+					let schedule = $('#schedule');
+					let pl1Table = $('#pl1Data');
+					let pl2Table = $('#pl2Data');
+					
+					let tagPl1   = '<tr><th scope="row"></th><td>' +   p.val().homePl1 + '</td><td>' + p.val().player1 + '</td><td>'  +  p.val().winPl1 + '</td></tr>';
+					let tagPl2   = '<tr><th scope="row"></th><td>' +   p.val().homePl2 + '</td><td>' + p.val().player2 + '</td><td>'  +  p.val().winPl2  + '</td></tr>';
+					
+					$('#schedule').text(`Agendado para ${p.val().date} as ${p.val().hour} horas`);
+					pl1Table.append(tagPl1);
+					pl2Table.append(tagPl2);
+				   
+				}else {
 
-				let schedule = $('#schedule');
-                let pl1Table = $('#pl1Data');
-				let pl2Table = $('#pl2Data');
+					let scheduleEnd = $('#scheduleEnd');
+					let tag      = `<tr><th scope=\\"row\\"></th><td>${p.val().player1}</td><td>${p.val().player2}</td><td>${p.val().winPl1} X ${p.val().winPl2}</td><td>${p.val().date}</td></tr>`;
+					scheduleEnd.append(tag);
+				}
 				
-				let tagPl1   = '<tr><th scope="row"></th><td>' +   p.homePl1 + '</td><td>' + p.player1 + '</td><td>'  +  p.winPl1 + '</td></tr>';
-				let tagPl2   = '<tr><th scope="row"></th><td>' +   p.homePl2 + '</td><td>' + p.player2 + '</td><td>'  +  p.winPl2  + '</td></tr>';
-                
-                $('#schedule').text(`Agendado para ${p.date} as ${p.hour} horas`);
-				pl1Table.append(tagPl1);
-                pl2Table.append(tagPl2);
-               
-			}else {
-
-                let scheduleEnd = $('#scheduleEnd');
-                let tag      = `<tr><th scope=\\"row\\"></th><td>${p.player1}</td><td>${p.player2}</td><td>${p.winPl1} X ${p.winPl2}</td><td>${p.date}</td></tr>`;
-				scheduleEnd.append(tag);
-				
-            }
-				
-				console.log(p._id, p.player1 + ' VS ' + p.player2);
 			});
-				// Caso não haja desafios agendados, remove a tabela exibe mensagem.
+				
+				// Caso não haja desafios agendados, remove a tabela e exibe mensagem.
 
 				if (challenge == 0){
 						
 					$('#schedule').text('Não há desafio agendado no momento');
 					$('#table').empty();
 				}
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
+	})
+	 .catch((error) => {
+	  console.error(error);
+	});	
 }

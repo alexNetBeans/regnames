@@ -81,6 +81,16 @@ function getHomeFromid(idHome){
 	case '23':
 	return 'Sala do Mestre'	
 	break;
+		 
+	case '24':
+	return 'Fogo'	
+	break;
+        case '25':
+	return 'Terra'	
+	break;
+	case '26':
+	return 'Ar'	
+	break;
 	  
 	 // Em teoria nunca deve entrar aqui :P 
 	  default:

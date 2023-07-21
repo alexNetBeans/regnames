@@ -8,15 +8,8 @@ $(function() {
         
         let PlName = $('#plName').val();
         let idHome = $('#idHome').val();
-		let wins =   $('#win').val();
+	let winPlayer = $('#win').val();
 		
-		if (wins == '' || wins == 0){
-			let winPlayer = 0;
-		}
-		else{
-			winPlayer = wins;
-		}
-
         if (PlName != '' && idHome != 'Escolha casa'){
             insertPlayer(PlName, idHome, winPlayer);
             $('#plName').val('');

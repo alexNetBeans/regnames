@@ -20,6 +20,26 @@ $(function() {
         }
 
     });
+
+
+    $('#btnAdd2').on('click', function(){
+        
+        let PlName = $('#plName').val();
+        let idHome = $('#idHome').val();
+	let winPlayer = $('#win').val();
+		
+        if (PlName != '' && idHome != 'Escolha casa'){
+            insertPlayer(PlName, idHome, winPlayer);
+            $('#plName').val('');
+            $('#idHome').val('Escolha casa');
+        }
+        else{
+            showMsg('warning');
+        }
+
+    });
+
+
 });
 
 // Gravar jogadores no banco

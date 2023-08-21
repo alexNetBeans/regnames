@@ -47,6 +47,33 @@ let btnSchedule = $('#btnSchedule').on('click', function(){
 	}
 });
 
+	let btnSchedule2 = $('#btnSchedule2').on('click', function(){
+ 
+	let pl1 = $('#player1').find(':selected').text()
+	let pl2 = $('#player2').find(':selected').text()
+
+	let homePl1 = $('#homePl1').text();
+	let homePl2 = $('#homePl2').text();
+
+	let ddate = $('#date').val();
+	let year  = ddate.substr(0, 4);
+	let month = ddate.substr(5, 2);
+	let day   = ddate.substr(8, 2);
+
+	let dateBr = day + '/' + month+ '/' + year;
+	let hour   = $('#hour').val();	
+
+
+	if(ddate != '' && hour != '')
+	{
+		setScheduler(pl1, pl2, homePl1, homePl2, dateBr, hour);
+	}
+	else{
+		showMsg('warning');
+	}
+});
+
+
 // Grava dados do desafio
 
 function setScheduler(pl1, pl2, homePl1, homePl2, dateBr, hour)

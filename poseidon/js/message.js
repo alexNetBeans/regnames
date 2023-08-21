@@ -26,7 +26,7 @@ function showMsg(msg)
     }
     else if (msg == 'erro')
     {
-        message = '<div class="alert alert-damger" role="alert"> Ocorreu um erro !</div>';
+        message = '<div class="alert alert-danger" role="alert"> Ocorreu um erro !</div>';
     }
     else if (msg == 'warning')
     {

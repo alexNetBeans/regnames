@@ -38,7 +38,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="index.html">Adicionar Player</a>
+                      <a class="nav-link" aria-current="page" href="index.html">Adicionar Player</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" aria-current="page" href="schedule.html">Agendar Desafios</a>
@@ -47,8 +47,8 @@
                       <a class="nav-link" aria-current="page" href="challenge.html">Gerenciar Desafio</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" aria-current="page" href="playermanager.html">Gerenciar Jogador</a>
-                    </li>
+                        <a class="nav-link active" aria-current="page" href="playermanager.html">Gerenciar Jogador</a>
+                      </li>
                   </ul>
                 </div>
               </div>
@@ -64,79 +64,100 @@
 
 <div class="form-add-player">
 
-		<img src="../images/addicon.png" width="28px" style="margin-right: 12px">
-		<strong > Adicionar Jogador </strong> 
+		<img src="../images/team.png" width="28px" style="margin-right: 12px">
+		<strong > Gerenciar Jogador </strong> 
 <hr>
 
 <div class="input-group mb-3 mt-4">
-  <label class="input-group-text" for="inputGroupSelect01">Casas</label>
-  <select class="form-select "  id="idHome">
-    <option selected>Escolha casa</option>
 
-	<optgroup label="Sala do Mestre">
-      <option value="23">Mestre do Santuário</option>
-    </optgroup>
-
-    <optgroup label="Ouro">
-      <option value="11">Áries</option>
-      <option value="12">Touro</option>
-      <option value="13">Gêmeos</option>  
-      <option value="14">Câncer</option>
-      <option value="15">Leão</option>
-      <option value="16">Virgem</option>
-      <option value="17">Libra</option>
-      <option value="18">Escorpião</option>
-      <option value="19">Sagitário</option>
-      <option value="20">Capricórnio</option>
-      <option value="21">Aquário</option>
-      <option value="22">Peixes</option>
-    </optgroup>
-
-  <optgroup label="Prata">
-      <option value="6">Corvo</option>
-      <option value="7">Centauro</option>
-      <option value="8">Lagarto</option>  
-      <option value="9">Perseu</option>  
-      <option value="10">Lira</option>  
-    </optgroup>
-
-    <optgroup label="Bronze">
-      <option value="1">Dragão</option>
-      <option value="2">Cisne</option>
-      <option value="3">Andrômeda</option>  
-      <option value="4">Pegasus</option>
-      <option value="5">Fênix</option>
-    </optgroup>
-	
-	<optgroup label="Aço">
-      <option value="24">Fogo</option>
-      <option value="25">Terra</option>
-      <option value="26">Ar</option>  
-    </optgroup>
-
-  </select>
+    <div class="input-group mb-1">
+        
+        <label class="input-group-text" for="inputGroupSelect01">Player</label>
+        <select class="form-select"  id="player1" autofocus onchange="getDataPlayer();">
+        </select>
+      </div>
 </div>
 
-	<input type="number" id="win" class="form-control mb-3" value="0" placeholder="Vitórias (caso já tenha)">
+    <strong> Nome do Player </strong>
+    <hr/>
+    <input type="text" id="playerName" class="form-control mb-3" placeholder="Nome do Player">
+    
+    <strong> Vitórias </strong>
+    <hr/>
+    <input type="number" id="win" class="form-control mb-3" placeholder="Vítória(s) do Player">
 
-	<div class="input-group mb-4">
-
-	  <input type="text" id="plName" class="form-control" placeholder="Nome ou nick do jogador" aria-label="Recipient's username" aria-describedby="button-addon2">
-    <button class="btn btn-outline-success d-none d-sm-block" id="btnAdd" type="button" id="button-addon2">Adicionar</button>  
-  </div>
+    <strong> Casa Atual </strong>
+    <hr/>
+    
+    <!-- <label class="input-group-text" for="inputGroupSelect01">Casas</label>-->
+    <select class="form-select "  id="idHome">
+      <option selected>Escolha casa</option>
   
-  <div class="d-grid gap-2 d-block d-sm-none mb-4">
-    <button class="btn btn-primary" id="btnAdd2" type="button"> Adicionar </button>
-</div>
-	
+      <optgroup label="Sala do Mestre">
+        <option value="23">Mestre do Santuário</option>
+      </optgroup>
+  
+      <optgroup label="Ouro">
+        <option value="11">Áries</option>
+        <option value="12">Touro</option>
+        <option value="13">Gêmeos</option>  
+        <option value="14">Câncer</option>
+        <option value="15">Leão</option>
+        <option value="16">Virgem</option>
+        <option value="17">Libra</option>
+        <option value="18">Escorpião</option>
+        <option value="19">Sagitário</option>
+        <option value="20">Capricórnio</option>
+        <option value="21">Aquário</option>
+        <option value="22">Peixes</option>
+      </optgroup>
+  
+    <optgroup label="Prata">
+        <option value="6">Corvo</option>
+        <option value="7">Centauro</option>
+        <option value="8">Lagarto</option>  
+        <option value="9">Perseu</option>  
+        <option value="10">Lira</option>  
+      </optgroup>
+  
+      <optgroup label="Bronze">
+        <option value="1">Dragão</option>
+        <option value="2">Cisne</option>
+        <option value="3">Andrômeda</option>  
+        <option value="4">Pegasus</option>
+        <option value="5">Fênix</option>
+      </optgroup>
+      
+      <optgroup label="Aço">
+        <option value="24">Fogo</option>
+        <option value="25">Terra</option>
+        <option value="26">Ar</option>  
+      </optgroup>
+  
+    </select>
 
+	<!--
+    <div class="input-group mb-4">
+	    <input type="text" id="plName" class="form-control" placeholder="Nome ou nick do jogador" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button class="btn btn-outline-success d-none d-sm-block" id="btnAdd" type="button" id="button-addon2">Adicionar</button>  
+  </div>
+
+  -->
+  
+  <div class="-d-grid gap-2- mb-4 mt-3 d-none d-sm-block" style="text-align: right">
+    <button class="btn btn-success btn-lg"     id="update" type="button">      Atualizar  </button>
+    <button class="btn btn-danger btn-lg mt-8" id="remove" type="button">      Remover    </button>
 </div>
+
+<div class="d-grid gap-2 d-block d-sm-none mb-4 mt-3">
+    <button class="btn btn-success" id="update2" type="button">  Atualizar   </button>
+    <button class="btn btn-danger"  id="remove2" type="button">   Remover    </button>
+</div>
+
 <div id="message"class="text-center"></div>
 
 <div class="col-md-2"></div><div></div>
 </div>
-
-
 
   </div> <!-- container -->   
 
@@ -149,8 +170,9 @@
 <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 <script defer src="../js/init-firebase.js"></script>  
 
-<script src="../js/addplayer.js"></script>
+<script src="../js/schedule.js"></script>
 <script src="../js/message.js"></script>
+<script src="../js/getDataPlayer.js"></script>
 
     </body>
 </html>

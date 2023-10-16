@@ -1,14 +1,15 @@
 
+let arrPlayerName = [];
+let idHome = [];
+
 // Atualiza a casa de acordo com jogador
 
 $('#player1').on('change', function(){
 	
 	let idHomePl1 = $('#player1').val();
 	let homePl1   = $('#homePl1');
-	homePl1.text(getHomeFromid(idHomePl1));
-	// alert(this.children[this.selectedIndex].textContent);
 
-	// let  a = $('#player1').find(':selected').text();
+	homePl1.text(getHomeFromid(idHomePl1));
 
 });
 
@@ -16,6 +17,7 @@ $('#player2').on('change', function(){
 	
 	let idHomePl2 = $('#player2').val();
 	let homePl2   = $('#homePl2');
+	
 	homePl2.text(getHomeFromid(idHomePl2));
 });
 
@@ -74,6 +76,47 @@ let btnSchedule = $('#btnSchedule').on('click', function(){
 });
 
 
+// Retorna id do player pelo nome da lista.
+
+function getIdByName( playerName ){
+
+	const dbRef = firebase.database().ref();
+	dbRef.child("players").get().then((snapshot) => 
+	{
+			snapshot.forEach(function(p, i)
+			{
+				if ( p.val().player == playerName){
+
+					idHome.push(Number(p.val().idHome));
+				} 
+			});
+			  /*.catch((error) => {
+			  console.error(error);
+			});	*/
+	});
+}
+
+
+// Organiza em ordem a lista dos players.
+
+function PlayerNameByOrder(){
+
+	arrPlayerName.sort(function (a, b){
+		
+		let x = a.toUpperCase();
+		let y = b.toUpperCase();
+	
+	return x == y ? 0 : x > y ? 1:-1
+
+	}).forEach(function(d, i){
+
+		getIdByName( arrPlayerName[i] );
+
+	});
+
+	aa();
+};
+
 // Grava dados do desafio
 
 function setScheduler(pl1, pl2, homePl1, homePl2, dateBr, hour)
@@ -95,18 +138,10 @@ function setScheduler(pl1, pl2, homePl1, homePl2, dateBr, hour)
 		if (error) {
 			showMsg('erro');
 		} else {
-		// Data saved successfully!
 		showMsg('success');
 		}
 	}).key   
 };
-
-// Chama função assim que load da página terminar
-
-$(function() 
-{
-	 getPlayers()
-});
 
 // Adiciona nome da casa pelo id
 
@@ -186,50 +221,64 @@ function getHomeFromid(idHome){
 	  
 	 // Em teoria nunca deve entrar aqui :P 
 	  default:
-		console.log('Ocorreu um erro !');
+		// console.log('Ocorreu um erro !');
 	}
 }
 
-
-// recupera player para adicionar ao form select
+// recupera players para adicionar ao form select
 
 function getPlayers(){
 
-	const dbRef = firebase.database().ref();
-    dbRef.child("players").get().then((snapshot) => 
+	let playersDB = [];
+
+	const dbRef = firebase.database().ref("players");
+	dbRef.orderByChild("player").on("child_added", snapshot =>
     {
+		playersDB.push({'player':snapshot.val().player, 'idhome':snapshot.val().idHome})
+	});
 
-		if (snapshot.exists()) 
-		{
-			console.log(snapshot.val());
-
+		playersDB.forEach(function(p, i){
+			
 			let addOption  = $('#player1');
 			let addOption2 = $('#player2');
 
-			snapshot.forEach(function(p, i){
-						
-			let tag = `<option value=${p.val().idHome} id=a>${p.val().player}</option>`;
-						
+			let tag = `<option value=${p.idhome}>${p.player}</option>`;
+			
+			// console.log(tag);								
+
 			addOption.append(tag);
 			addOption2.append(tag);
-
-					
+						
 			let idHomePl1 = $('#player1').val();
 			let homePl1   = $('#homePl1');
 			homePl1.text(getHomeFromid(idHomePl1));
 
 			let idHomePl2 = $('#player2').val();
 			let homePl2   = $('#homePl2');
-			homePl2.text(getHomeFromid(idHomePl2));
-					
-			});
-			} 
-			else 
-			{
-				console.log("No data available");
-			}
-			}).catch((error) => 
-			{
-				console.error(error);
-			});
-	}
+			homePl2.text(getHomeFromid(idHomePl2));			
+
+		});
+}
+
+// recupera player para adicionar em uma list
+
+async function getPlayersList(){
+
+	// const dbRef = firebase.database().ref();
+    // dbRef.child("players").get().then((snapshot) => 
+
+	let addOption = $('#player1');
+
+		const dbRef = firebase.database().ref("players");
+		dbRef.orderByChild("player").on("child_added", snapshot =>
+		{
+			arrPlayerName.push({'player':snapshot.val().player})
+		});	
+		
+			
+		arrPlayerName.forEach(function(p, i){
+		
+			let tag = `<option value=${p.idhome}>${p.player}</option>`;
+			addOption.append(tag);
+		});	
+};

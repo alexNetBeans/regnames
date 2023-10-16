@@ -20,16 +20,18 @@ let btnRemove2 = $('#remove2').on('click', function(){
     removeDataPlayer(idPlayer)
 });
 
-
 // Remove dados do Player
 
 function removeDataPlayer(idPlayer)
 {
     firebase.database().ref('players/'+ idPlayer).remove();
     showMsg('success');
-    location.reload(true);
+    
+    setTimeout((data)=>{
+      location.reload(true);
+    }, "1500");
+    
 }
-
 
 // Atualiza dados do Player
 
@@ -65,21 +67,22 @@ function getDataPlayer(){
 
     let playerSelected = $("#player1 option:selected").text()
 
-    const dbRef = firebase.database().ref();
+  const dbRef = firebase.database().ref();
 	dbRef.child("players").get().then((snapshot) => 
 	{
 	    snapshot.forEach(function(p, i){
 
 			if (p.val().player == playerSelected){
 
-                idPlayer = p.key;
-                $('#playerName').val(p.val().player);	
-                $('#win').val(p.val().wins);
-                $('#idHome').val(p.val().idHome);	
+          idPlayer = p.key;
+          $('#playerName').val(p.val().player);	
+          $('#win').val(p.val().wins);
+          $('#idHome').val(p.val().idHome);
+
     }})
-			 //.catch((error) => {
-			  //console.error(error);
-			//});	
+			 /* .catch((error) => {
+			 console.error(error);
+			});	*/
 	});
 };
 

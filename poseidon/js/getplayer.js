@@ -10,7 +10,7 @@ $(function()
 
 function getHomeFromid(idHome){
 	
- switch (idHome) {
+ switch ( idHome ) {
 	
 	case '1':
 	return 'Dragão'	
@@ -93,6 +93,7 @@ function getHomeFromid(idHome){
 	break;
 	  
 	 // Em teoria nunca deve entrar aqui :P 
+
 	  default:
 		console.log('Ocorreu um erro !');
 	}
@@ -102,17 +103,25 @@ function getHomeFromid(idHome){
 
 function getPlayers(){
 
-	const dbRef = firebase.database().ref();
-	dbRef.child("players").get().then((snapshot) => 
+	let rankList = [];
+
+	const dbRef = firebase.database().ref("players");
+	dbRef.orderByChild("player").on("child_added", snapshot => 
 	{
-			let plTable = $('#plData');
-			snapshot.forEach(function(p, i){
+		rankList.push({'player': snapshot.val().player, 'wins': snapshot.val().wins, 'idhome': snapshot.val().idHome})
+	});
+
+		let plTable = $('#plData');
+		rankList.forEach(function(p, i){
 					
-				let tag = '<tr><th scope="row"></th><td>' + p.val().player +  '</td><td>' + p.val().wins + '</td><td>' + getHomeFromid(p.val().idHome) + '</td></tr>';
-				plTable.append(tag);
-			})
-			 .catch((error) => {
-			  console.error(error);
-			});	
-	})
-}
+		let tag = '<tr><th scope="row"></th><td>' + p.player +  '</td><td>' + p.wins + '</td><td>' + getHomeFromid(p.idhome) + '</td></tr>';
+		plTable.append(tag);
+		})
+			//.catch((error) => {
+			//console.error(error);
+		//});	
+};
+
+/* dbRef.orderByChild("player").on("child_added", snap => {
+    console.log(snap.val());
+   }); */ 

@@ -1,3 +1,44 @@
+
+@media only screen and (max-width: 1025px) {
+    .ia-titulo-010- {
+        font-size: 18px;
+        line-height: 22px;
+        margin: 0 auto;
+        display: table;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+
+
+.ia-titulo-010- {
+
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 32px;
+    font-family: "Montserrat", Sans-serif;
+    background-color: var(--ia-cor1);
+    width: auto;
+    display: inline-masonry;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px 20px;
+    margin: 0 auto;
+}
+
+
+.ia-titulo-011- {
+
+font-size: 50px;
+text-align: center;
+font-weight: bold;
+
+}
+
 html, body {
     font-weight: 300;
     letter-spacing: 1px;
@@ -137,9 +178,9 @@ a {
         border-top: 1px solid #f2f3f9;
     }
 
-{
+/*{
     padding-left: 0px;
-}
+}*/
 
 .nav-side .submenu-item {
     color: var(--text-color);
@@ -197,11 +238,11 @@ a {
         grid-template-rows: auto;
         display: grid !important;
     }
-    /*
+    
     .conteudoSobreSlide {
         position: absolute;
         top: 65px;
-    }*/
+    }
 
     .retangulo {
         display: none;

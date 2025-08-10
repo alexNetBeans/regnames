@@ -19,6 +19,8 @@ function getDataModalAdm()
 		 $('#nameEdit').val('');
 		 $('#regData1').text('');
 		 $('#idEdit').text('');
+
+		 closeModal('adm');
 	 }
 	else{
 		
@@ -179,4 +181,5 @@ $('#btnLogin').click(function(){
 		doLogin( email, passwd );
 	}
 });
+
 

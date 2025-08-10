@@ -51,12 +51,13 @@ function checkLogin(){
 		getDataModalAdm();
 		$('#adm').modal('show');
 		//console.log(user.email)
-		return 1;
+		
     }
     else{
+		closeModal('adm');
 		$('#login').modal('show');
         // console.warn('Não está logado !');
-		return 0;
+		
     }
   });	
 }
@@ -181,5 +182,6 @@ $('#btnLogin').click(function(){
 		doLogin( email, passwd );
 	}
 });
+
 
 

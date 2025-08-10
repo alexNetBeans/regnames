@@ -14,6 +14,14 @@ function logOut(){
 
 function getDataModalAdm()
 {
+	 if (checkLogin() == 0)
+	 {
+		 $('#nameEdit').val('');
+		 $('#regData1').text('');
+		 $('#idEdit').text('');
+	 }
+	else{
+		
 	// --  ABRE MODAL ADM -- 
 	
 		$('#nameEdit').val( $('#nameData').html() );
@@ -28,6 +36,7 @@ function getDataModalAdm()
 		{
 			$("#femEdit").prop('checked', true);	
 		}
+	}
 }
 
 // -- VERFICA SE ESTÁ LOGADO -- 
@@ -40,10 +49,12 @@ function checkLogin(){
 		getDataModalAdm();
 		$('#adm').modal('show');
 		//console.log(user.email)
+		return 1;
     }
     else{
 		$('#login').modal('show');
         // console.warn('Não está logado !');
+		return 0;
     }
   });	
 }
@@ -168,3 +179,4 @@ $('#btnLogin').click(function(){
 		doLogin( email, passwd );
 	}
 });
+

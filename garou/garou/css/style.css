@@ -1,0 +1,105 @@
+*{
+	margin:     0;
+	padding:    0;
+	box-sizing: border-box;
+}
+
+.bckGarou{
+	
+  background-image:	 url('../images/garou.jpg');
+  background-repeat: no-repeat;
+  background-size:   cover;
+  width: 			 100%;
+  height: 			 100%;
+
+}
+
+.bg-garou{
+
+	background-color: #d30735;
+	color: 			  #ffffff;
+	
+}
+
+.img-garou{
+	
+	margin-top: 	    0;
+	background-image:   url('../images/garou-img.jpg');
+	background-size:    contain;
+	-background-repeat: no-repeat;
+	height: 			100vh;
+}
+
+
+.form-garou {
+	
+	width:  		  70%;
+	padding:          18px;
+	margin-left: 	  auto;
+	margin-right:     auto;
+	margin-bottom:	  20px;
+	border-radius:    20px;
+	
+	background: #d13252;
+	background: linear-gradient(90deg,rgba(209, 50, 82, 1) 0%, rgba(132, 147, 194, 1) 73%, rgba(139, 232, 164, 1) 100%);
+}
+
+input textarea {
+	outline: none;
+}
+
+.tablePlayers{
+	
+	width:			  70%;
+	margin-left: 	  auto;
+	margin-right:     auto;
+	cursor:			  pointer;	
+	opacity: 		  0.9;
+}
+
+.tablePlayers {
+	margin-bottom:	  20px; 	
+}
+
+.bgTable thead{
+	background-color: #f6d500;
+}
+
+.fundoModalWelcome{
+	
+	background-image:url('../images/terrystage.gif');
+}
+
+footer{
+	background-color: #d30735;
+}
+
+@media screen and (max-width: 412px){
+	
+	.bckGarou{
+		background-image:	 url('../images/garou-mobile.jpg');
+		background-repeat:   repeat;
+		background-size:     contain;
+		height: 			 100va;
+	} 
+	
+	.form-garou{
+		width: 100%;
+		margin-bottom: 30px;
+	}
+	
+	.tablePlayers{
+	
+	width: 100%;
+
+	}
+	
+	.logoGarou{
+		display: none;
+	}
+	
+	.btn-mobile{
+		width: 	    100%;
+		margin-top: 2px;
+	}
+} 

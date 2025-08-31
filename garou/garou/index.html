@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+	
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	
+	<!-- MEU CSS -->
+	
+	<link href="css/style.css" rel="stylesheet">
+	<link rel="icon" href="images/icon.ico"/>
+
+    <title> Grupo Garou MOTW </title>
+  </head>
+  
+  <body onload="getDataPlayers()">
+  
+  <!-- onload="-getDataPlayers();" -->
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-garou">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+		<img src="images/logo_garou-2.png" width="100" class="img-fluid">
+	</a>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li>
+          <a class="nav-link nav-item text-white fw-bold" aria-current="page" href="#"> BEM VINDO AO GRUPO GAROU MOTW </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="row">
+	
+		<div class="col bckGarou">
+		
+		 	<div class="mx-auto d-block" style="width: 70%">
+
+					<h1 class="text-center mt-4 fw-bold text-danger"> PLAYERS DO GRUPO </h1>
+					<hr class="text-dark" size="5"/>
+			</div>
+		
+			<div class="p-3 bg-white tablePlayers rounded  d-flex justify-content-center">	
+			
+			<!-- SPINNER / LOAD -->
+			
+				<div class="d-flex justify-content-center" id="load">
+				
+					<div class="spinner-border text-danger" role="status"></div>
+					
+				</div>
+				
+			<!-- TABELA DOS PLAYERS -->	
+
+				<div class="table-responsive" style="width:100%">
+
+					<table class="table table-striped bgTable fw-bold bg-transparent d-none">
+					<thead>
+						<tr>
+							
+						<th scope="col"> Player   		</th>
+						<th scope="col"> Nick 			</th>
+						<th scope="col"> Char 			</th>
+						<th scope="col"> Perfil 		</th>
+						
+						</tr>
+					</thead>
+					
+					<tbody class="tabPlayers">
+
+					</table> 	
+
+				</div>
+			
+			</div>	
+		
+			<!-- FORMULÁRIO PLAYERS -->
+		
+			<div class="mx-auto d-block tarja" style="width: 70%">
+				<h1 class="text-center mt-4 fw-bold text-danger"> FAÇA PARTE DA LISTA DE PLAYERS </h1>
+				<hr class="text-dark" size="5"/>
+			</div>
+		
+			<div class="form-garou mb-4 bg" style="margin-top: 10px">
+			
+					 <div class="d-flex justify-content-between p-2 mb-3" style="border: 2px solid white">
+					 
+							<img src="images/chars/terrygarou.webp"  height="152" id="charImg" class="chars"/>
+							<img src="images/logo_garou-2.png" class="logoGarou" width="400"/>
+							<img src="images/portraits/0.gif" height="120" class="logoGarou-" style="border: 2px solid white; margin-top: 15px" id="portChars"/>
+							
+					 </div>
+					 
+					<div class="my-2 text-white fw-bold"> SELECIONE SEU PERSONAGEM: </div>
+					
+					<select class="form-select" aria-label="Default select example" id="chars">
+					 
+					  <option selected value="0"> Terry Bogard </option>
+					  <option value="1"> Rock Howard </option>
+					  <option value="2"> B. Jenet </option>
+					  <option value="3"> Kim Dong Hwan </option>
+					  <option value="4"> Kim Jae Hoon </option>
+					  <option value="5"> Hotaru Futaba </option>
+					  <option value="6"> Gato </option>
+					  <option value="7"> Tizoc (The Griffon Mask) </option>
+					  <option value="8"> Marco Rodrigues (Khushnood Butt) </option>
+					  <option value="9"> Hokutomaru </option>
+					  <option value="10"> Kevin Rian </option>
+					  <option value="11"> Freeman </option>
+					  
+					  <option value="12"> Grant (Abel Cameron) </option>
+					  <option value="13"> Kain R. Heinlein </option>
+					  
+					</select>
+
+						<input type="text" class="form-control mt-2" placeholder="Digite seu Nome (usado no grupo)" id="nome">
+						<input type="text" class="form-control mt-2" placeholder="Digite seu Nick FightCade" id="nick">
+						
+						<button class="btn btn-primary mt-3 btn-mobile p-2 fw-bold" id="btn-submit"> BUST WOLF! 🐺 </button>
+			</div>
+
+			<footer class="fw-bold text-center p-3 text-white text-uppercase"> Grupo Garou MOTW - 2025 </footer>
+
+		</div>
+		
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	
+    <!-- FIREBASE -->
+	
+	<script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script> 
+	<script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+	
+	<script src="js/script.js"></script>
+
+	<script defer src="js/config.js"></script>
+	<script defer src="crud/crud.js"></script>
+	
+	<!-- MODAL BEM VINDO / CADASTRO REALIZADO COM SUCESSO -->
+	
+	<div class="modal fade" id="modalwelcome" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">SEJA BEM VINDO </h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body fundoModalWelcome">
+			
+			<h2 class="text-center text-white fw-bold" style="margin-bottom: 15px"> BEM VINDO AO GRUPO  !!</h2>
+			<img src="images/terrywelcome2.png" width="300" class="mx-auto d-block"/>
+			<h2 class="text-center text-danger fw-bold"> BUST WOLF !!</h2>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Fechar </button>
+			
+		  </div>
+		</div>
+	  </div>
+    </div>
+	
+  </body>
+  
+</html>
